@@ -1,0 +1,21 @@
+    private static long getFolderSize(File file) {
+        long size = 0;
+        try {
+            if (file.isDirectory()) {
+                File[] fileList = file.listFiles();
+                for (File subFile : fileList) {
+                    if (subFile.isDirectory()) {
+                        size += getFolderSize(subFile);
+                    } else {
+                        size += subFile.length();
+                    }
+                }
+            } else {
+                size += file.length();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return size;
+    }
